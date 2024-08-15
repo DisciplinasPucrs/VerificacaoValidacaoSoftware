@@ -1,0 +1,29 @@
+{
+	"name": "Java",
+	"image": "mcr.microsoft.com/devcontainers/java:1-21-bullseye",
+	"features": {
+		"ghcr.io/devcontainers/features/java:1": {
+			"version": "none",
+			"installMaven": "true",
+			"installGradle": "false"
+		},
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
+	},
+	// Configurar propriedades específicas de ferramenta.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				// Extensão Java da Microsoft já está configurada por padrão na imagem.
+				//"vscjava.vscode-java-pack",
+				// Extensão Spring Boot.
+				"vmware.vscode-boot-dev-pack"
+			]
+		}
+	}
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "java -version",
+	// Set `remoteUser` to `root` to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	// "remoteUser": "root"
+}
