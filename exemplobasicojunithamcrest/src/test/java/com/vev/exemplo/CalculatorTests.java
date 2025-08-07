@@ -2,6 +2,7 @@ package com.vev.exemplo;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,7 @@ class CalculatorTests {
 	@DisplayName("1 + 1 = 2")
 	void addsTwoNumbers() {
 		Calculator calculator = new Calculator();
-		assertThat("1 + 1 should equal 2", calculator.add(1, 1), equalTo(2));
+		assertThat("1 + 1 should equal 2", calculator.add(1, 1), is(equalTo(2)));
 	}
 	
 	@ParameterizedTest(name = "{0} + {1} = {2}")
@@ -26,6 +27,6 @@ class CalculatorTests {
 	void add(int first, int second, int expectedResult) {
 		Calculator calculator = new Calculator();
 		assertThat(first + " + " + second + " should equal " + expectedResult,
-			calculator.add(first, second), equalTo(expectedResult));
+			calculator.add(first, second), is(equalTo(expectedResult)));
 	}
 }
