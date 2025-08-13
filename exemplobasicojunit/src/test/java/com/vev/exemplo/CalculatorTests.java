@@ -27,4 +27,11 @@ class CalculatorTests {
 		assertEquals(expectedResult, calculator.add(first, second),
 				() -> first + " + " + second + " should equal " + expectedResult);
 	}
+
+	@Test
+	void addsTwoNumbersWithDefect() {
+		Calculator calculator = new Calculator();
+		long r = Integer.MAX_VALUE + 1L;
+		assertEquals(r, calculator.add(Integer.MAX_VALUE, 1));
+	}
 }
