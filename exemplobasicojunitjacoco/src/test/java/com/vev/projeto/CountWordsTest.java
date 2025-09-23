@@ -12,12 +12,13 @@ class CountWordsTest {
         int words = new CountWords().count("dogs cats");
         assertThat(words).isEqualTo(2);
     }
-
+    
     @Test
     void t2() {
         int words = new CountWords().count("dog cat");
         assertThat(words).isZero();
     }
+    
     /*
     @Test
     void t3() {
