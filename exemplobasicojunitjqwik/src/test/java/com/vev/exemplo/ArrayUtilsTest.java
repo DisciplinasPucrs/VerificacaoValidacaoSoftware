@@ -76,7 +76,6 @@ class ArrayUtilsTest {
 
     /** Use this method to convert a list of integers to an array */
     private int[] convertListToArray(List<Integer> numbers) {
-        int[] array = numbers.stream().mapToInt(x -> x).toArray();
-        return array;
+        return numbers.stream().mapToInt(x -> x).toArray();
     }
 }

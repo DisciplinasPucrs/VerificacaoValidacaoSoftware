@@ -9,12 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static java.math.BigDecimal.valueOf;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class BasketPBTest {
+class BasketPBTest {
 
     class AddAction implements Action<Basket> {
 
@@ -113,8 +112,8 @@ public class BasketPBTest {
         Arbitrary<Product> products = Arbitraries.oneOf(
                 randomProducts
                         .stream()
-                        .map(product -> Arbitraries.of(product))
-                        .collect(Collectors.toList()));
+                        .map(Arbitraries::of)
+                        .toList());
 
         // create arbitrary quantities
         Arbitrary<Integer> qtys = Arbitraries.integers().between(1, 100);
@@ -122,7 +121,7 @@ public class BasketPBTest {
         // now, we combine products and qtys and generate 'add actions'
         return Combinators
                 .combine(products, qtys)
-                .as((product, qty) -> new AddAction(product, qty));
+                .as(AddAction::new);
     }
 
     @Property(afterFailure = AfterFailureMode.SAMPLE_ONLY)
