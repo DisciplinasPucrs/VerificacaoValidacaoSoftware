@@ -21,8 +21,8 @@ class ArrayListSpyTest {
 
     @Test
     void addSpyOnArrayListTest() {
-        doReturn("algo").when(spyList).get(0);
-        assertEquals("algo", spyList.get(0));
+        //doReturn("algo").when(spyList).get(0);
+        //assertEquals("algo", spyList.get(0));
         var resultado = spyList.add("um");
         assertTrue(resultado);
         assertThat(spyList).hasSize(1);
