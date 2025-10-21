@@ -1,0 +1,3 @@
+Antes de executar o teste com Selenium:
+- Baixar a implementação do Spring Pet Clinic https://github.com/spring-projects/spring-petclinic
+- Executar o sistema de acordo com os passos indicados na documentação do projeto
