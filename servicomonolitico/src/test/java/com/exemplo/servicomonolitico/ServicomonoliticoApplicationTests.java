@@ -97,7 +97,7 @@ class ServicomonoliticoApplicationTests {
 
         DocumentContext documentContext = JsonPath.parse(response.getBody());
         JSONArray page = documentContext.read("$[*]");
-        assertThat(page.size()).isEqualTo(1);
+        assertThat(page).hasSize(1);
     }
 
     @Test
@@ -109,7 +109,7 @@ class ServicomonoliticoApplicationTests {
 
         DocumentContext documentContext = JsonPath.parse(response.getBody());
         JSONArray read = documentContext.read("$[*]");
-        assertThat(read.size()).isEqualTo(1);
+        assertThat(read).hasSize(1);
 
         double amount = documentContext.read("$[0].amount");
         assertThat(amount).isEqualTo(150.00);
@@ -124,7 +124,7 @@ class ServicomonoliticoApplicationTests {
 
         DocumentContext documentContext = JsonPath.parse(response.getBody());
         JSONArray page = documentContext.read("$[*]");
-        assertThat(page.size()).isEqualTo(3);
+        assertThat(page).hasSize(3);
 
         JSONArray amounts = documentContext.read("$..amount");
         assertThat(amounts).containsExactly(1.00, 123.45, 150.00);
