@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.vev</groupId>
-	<artifactId>exemplobasicojunitjqwik</artifactId>
+	<artifactId>exemplobasicojunit</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<properties>
@@ -16,7 +16,7 @@
 			<dependency>
 				<groupId>org.junit</groupId>
 				<artifactId>junit-bom</artifactId>
-				<version>6.0.3</version>
+				<version>6.1.0</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -24,6 +24,11 @@
 	</dependencyManagement>
 
 	<dependencies>
+		<dependency>
+    		<groupId>org.hsqldb</groupId>
+    		<artifactId>hsqldb</artifactId>
+    		<version>2.7.4</version>
+		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
@@ -35,15 +40,21 @@
   			<version>3.27.7</version>
   			<scope>test</scope>
 		</dependency>
-    	<dependency>
-	        <groupId>net.jqwik</groupId>
-    	    <artifactId>jqwik</artifactId>
-        	<version>1.9.3</version>
-        	<scope>test</scope>
-    	</dependency>		
+		<dependency>
+    		<groupId>org.mockito</groupId>
+    		<artifactId>mockito-core</artifactId>
+    		<version>5.23.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+    		<groupId>org.mockito</groupId>
+    		<artifactId>mockito-junit-jupiter</artifactId>
+    		<version>5.23.0</version>
+    		<scope>test</scope>
+		</dependency>
 	</dependencies>
 
-	<build>
+		<build>
 		<plugins>
 			<plugin>
   				<groupId>org.jacoco</groupId>
@@ -59,21 +70,23 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.5.4</version>
-				<configuration>
-					<enableAssertions>true</enableAssertions>
-                    <argLine>@{argLine}</argLine>
-                </configuration>
-			</plugin>
+     			<groupId>org.apache.maven.plugins</groupId>
+     			<artifactId>maven-dependency-plugin</artifactId>
+     			<executions>
+         			<execution>
+             			<goals>
+                 			<goal>properties</goal>
+             			</goals>
+         			</execution>
+     			</executions>
+ 			</plugin>
 			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.15.0</version>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.5.5</version>
 				<configuration>
-					<compilerArgs>
-						<arg>-parameters</arg>
-					</compilerArgs>
-				</configuration>
+                    <argLine>@{argLine} -javaagent:${org.mockito:mockito-core:jar}</argLine>
+                </configuration>
 			</plugin>
 		</plugins>
 	</build>
