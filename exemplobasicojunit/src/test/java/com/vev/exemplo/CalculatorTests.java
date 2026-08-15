@@ -11,8 +11,15 @@ class CalculatorTests {
 	@Test
 	@DisplayName("1 + 1 = 2")
 	void addsTwoNumbers() {
+		//arrange
 		Calculator calculator = new Calculator();
-		assertEquals(2, calculator.add(1, 1), "1 + 1 should equal 2");
+		int a = 1;
+		int b = 1;
+		int expected = 2;
+		//act
+		int result = calculator.add(a, b);
+		//assert
+		assertEquals(expected, result, "1 + 1 should equal 2");
 	}
 	
 	@ParameterizedTest(name = "{0} + {1} = {2}")
