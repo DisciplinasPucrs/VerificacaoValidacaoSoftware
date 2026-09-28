@@ -50,16 +50,14 @@ class SAPInvoiceSenderTest {
         when(invoiceFilter.lowValueInvoices()).thenReturn(invoices);
 
         String date = LocalDate.now().format(DateTimeFormatter.ofPattern("MMddyyyy"));
+        SapInvoice mauriciosInvoice = new SapInvoice("Mauricio", 20, date + "Ma");
+        SapInvoice franksInvoice = new SapInvoice("Frank", 25, date + "Fr");
+        SapInvoice stevesInvoice = new SapInvoice("Steve", 48, date + "St");
 
         List<Invoice> failedInvoices = invoiceSender.sendLowValuedInvoices();
 
-        SapInvoice mauriciosInvoice = new SapInvoice("Mauricio", 20, date + "Ma");
-        verify(sap).send(mauriciosInvoice);
-
-        SapInvoice franksInvoice = new SapInvoice("Frank", 25, date + "Fr");
+        verify(sap).send(mauriciosInvoice);        
         verify(sap).send(franksInvoice);
-        
-        SapInvoice stevesInvoice = new SapInvoice("Steve", 48, date + "St");
         verify(sap).send(stevesInvoice);
 
         assertThat(failedInvoices).isEmpty();
@@ -76,6 +74,7 @@ class SAPInvoiceSenderTest {
         doThrow(new SAPException()).when(sap).send(franksInvoice);
 
         List<Invoice> failedInvoices = invoiceSender.sendLowValuedInvoices();
+        verify(sap).send(franksInvoice);
         assertThat(failedInvoices).containsExactly(frank);
     }
 }
